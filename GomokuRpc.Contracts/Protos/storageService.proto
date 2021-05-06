@@ -1,0 +1,43 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GomokuRpc.Contracts.Protos";
+
+package storageService;
+
+service StorageService{
+	rpc SaveGameResult(GameResultCreateRequest) returns (StorageOperationResult);
+	rpc GetGameResult(GameResultQuery) returns (GameResultResponse);
+	rpc GetGameResults() return (stream GameResultResponse);
+}
+
+message GameResultCreateRequest{
+string winningPlayerName = 1;
+string losingPlayerName = 2;
+google.protobuf.Timestamp finishedAt = 3;
+}
+
+message StorageOperationResult{
+bool isSuccess = 1;
+StorageOperationType storageOperationType = 2;
+google.protobuf.Timestamp reportedAt = 3;
+string payload = 4;
+}
+
+message GameResultQuery{
+int32 id = 1;
+}
+
+message GameResultResponse{
+int32 id = 1;
+string winningPlayerName = 2;
+string losingPlayerName = 3;
+google.protobuf.Timestamp finishedAt = 4;
+}
+
+enum StorageOperationType{
+	CREATE = 0;
+	READ = 1;
+	UPDATE = 2;
+	DELETE = 3;
+}
