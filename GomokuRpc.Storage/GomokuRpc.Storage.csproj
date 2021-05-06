@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="../GomokuRpc.Contracts/Protos/storageService.proto" GrpcServices="Server" />
+	</ItemGroup>
 
 </Project>
