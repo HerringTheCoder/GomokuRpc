@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option csharp_namespace = "GomokuRpc.Contracts.Protos";
+
+package gameService;
+
+service GameService{
+	rpc MakeMove(MoveRequest) returns (MoveResponse);
+	rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse);
+	rpc ResetBoard(ResetRequest) returns (ResetResponse);
+}
+
+message ResetRequest{}
+message ResetResponse{
+	bool isSuccessful = 5;
+}
+
+message CreateRoomRequest{}
+message CreateRoomResponse{
+	int32 gameCode = 1;
+}
+
+message MoveRequest{
+	PlayerId playerId = 1;
+	int32 positionX = 2;
+	int32 positionY = 3;
+}
+
+message MoveResponse{
+	PlayerId playerId = 1;
+	int32 positionX = 2;
+	int32 positionY = 3;
+	bool isSuccessful = 4;
+	bool isFinal = 5;
+}
+
+enum PlayerId {
+	UNDEFINED = 0;
+	FIRST = 1;
+	SECOND = 2;
+}
