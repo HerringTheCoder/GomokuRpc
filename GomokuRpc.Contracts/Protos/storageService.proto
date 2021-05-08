@@ -8,7 +8,7 @@ package storageService;
 service StorageService{
 	rpc SaveGameResult(GameResultCreateRequest) returns (StorageOperationResult);
 	rpc GetGameResult(GameResultQuery) returns (GameResultResponse);
-	rpc GetGameResults() return (stream GameResultResponse);
+	rpc GetGameResults(GameResultsQuery) returns (stream GameResultResponse);
 }
 
 message GameResultCreateRequest{
@@ -26,6 +26,10 @@ string payload = 4;
 
 message GameResultQuery{
 int32 id = 1;
+}
+
+
+message GameResultsQuery{
 }
 
 message GameResultResponse{
